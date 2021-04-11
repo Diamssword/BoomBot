@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="libs/iziToast/dist/css/iziToast.min.css">
+<script src="libs/iziToast/dist/js/iziToast.min.js"></script>
+
+<% if(success != ''){ %> 
+    <div class="success"></div>
+    <script>
+        iziToast.success({
+            title: "Succès :",
+            message: `<%= success_msg %>`,
+            timeout: 5000
+        });
+    </script>
+<% } %>
+
+<% if(warning != ''){ %> 
+    <div class="warning"></div>
+    <script>
+        iziToast.warning({
+            title: "Attention :",
+            message: `<%= warning_msg %>`,
+            timeout: 5000,
+            color: "yellow"
+        });
+    </script>
+<% } %> 
+<% if(error != ''){ %>
+    <div class="error"></div>
+    <script>
+        iziToast.error({
+            title: "Erreur :",
+            message: `<%= error %>`,
+            timeout: 5000
+        });
+    </script>
+<% } %>  

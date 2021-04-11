@@ -1,0 +1,78 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+</script>
+
+<header>
+    <article class="left_header">
+        <div class="logo_agence">
+            <!-- background image -->
+            <img class="bg_header" src="assets/svg/header.svg" alt="" />
+
+            <!-- Logo -->
+            <img class="logo_header" src="assets/logo/logo-drive-innov-blanc.png" alt=l />
+            <div id="crouton">
+                <ul>
+                    <%if(locals.breadcrumbs){
+                        for(k in breadcrumbs){
+                            let nd=breadcrumbs[k];%>
+                    <li><a href="<%= nd.url%>"><%= nd.name%></a></li>
+                    <%}}%>
+                </ul>
+            </div>
+        </div>
+            
+    </article>
+    <article class="right_header">
+		<%
+			var prenomuser="Admin";
+			var nomuser="";		
+			var countNotif="0";
+			if(locals.userInfos)
+			{
+				prenomuser= userInfos.PRENOM;
+				if((prenomuser+" "+ userInfos.NOM).length >15)
+					nomuser= userInfos.NOM.substring(0,1)+".";
+				else
+					nomuser= userInfos.NOM;
+				countNotif=userInfos.NOTIFS.length;
+			}
+			%>
+        <div class="parametre_utilisateur">
+			<a href="/logout" class="deconnexion">Déconnexion</a>
+            <div class="div_notif">
+		</div>
+        </div>
+        
+        <div class="navigation">
+            <%if(locals.isAdmin){%>
+				<div id="menuHeaderAccueil">
+					<img src="assets/svg/home.svg">
+	
+					<a href='/franchise'>Franchises</a>
+				</div>
+				<div id="menuHeaderAccueil">
+					<img src="assets/svg/eleve.svg">
+	
+					<a href='/admin_accounts'>Utilisateurs</a>
+				</div>
+				<% }%>
+				<div id="menuHeaderCDR">
+					<img src="assets/svg/code_route.svg">
+	
+					<a href="/cdr_acceuil">CDR</a>
+				</div>
+
+				<div id="menuHeaderLC">
+					<img src="assets/svg/examens.svg">
+	
+					<a href="/livret_conduite">Livret de conduite</a>
+				</div>
+        </div>
+    </article>
+</header>
+	<% if(locals.baseHeader){ %>
+		<script>
+			document.getElementById("menuHeader<%= locals.baseHeader %>").style.opacity = "1"; 
+		</script>
+	<%}%>
