@@ -1,11 +1,12 @@
 const LocalStrat = require('passport-local').Strategy,
 bcrypt           = require('bcryptjs'),
-ADMIN = require('../models/admins');
+USER = require('../models/users');
 
 module.exports = function(passport) {
     passport.use('local',
         new LocalStrat({ usernameField: 'name', passReqToCallback: true } ,async(req,name , password, done) => {
-            ADMIN.findOne({
+            console.log("log")
+            USER.findOne({
                 NAME : name
             }).then(user => {
                 console.log(name)
@@ -15,9 +16,6 @@ module.exports = function(passport) {
                 bcrypt.compare(password , user.MDP , (err , isMatch) => {
                     if(err) throw err;
                     if(isMatch) {
-                        req.session.admin_type = user.TYPE;
-                        delete req.session.redirectAfterConnect;
-                        req.session.emailLoggedAdmin = user.EMAIL;
                         return done(null , user);
                     } else {
                         return done(null , false , { message : "Le mot de passe ou l'email est incorrect" });
@@ -31,7 +29,7 @@ module.exports = function(passport) {
         done(null , user.id);
     });
     passport.deserializeUser(async function(id , done) {
-        ADMIN.findById(id , function(err , user) {
+        USER.findById(id , function(err , user) {
             done(err , user);
         });
     });

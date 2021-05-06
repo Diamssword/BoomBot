@@ -13,6 +13,6 @@ module.exports = {
             return next();
         }
         req.flash('warning_msg' , "Vous êtes déjà connecté");
-        res.redirect('/nav_CDR');
+        res.redirect('/manager');
     }
 };

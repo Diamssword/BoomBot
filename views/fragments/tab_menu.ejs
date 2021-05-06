@@ -1,0 +1,18 @@
+<div class="tab-wrapper">
+  
+  <%  if(locals.user.SOUNDBOARDS.length <=0)
+  {
+    locals.user.SOUNDBOARDS.push({LABEL:"defaut",SOUNDS:[]});
+  }%>
+    <ul id="tab_ul" class="tab-menu">
+      <%for(k in locals.user.SOUNDBOARDS){%>
+      <li <%if(k==0){%>class="active"<%}%> onclick="tabChangeBoard(<%-k%>);" id="tab_li_<%-k%>"><%-locals.user.SOUNDBOARDS[k].LABEL%> <i <%if(k==0){%>id="close_bugfix"<%}%> class="far fa-times-circle fa-1x box-board-cross" onclick="deleteSoundBoard(<%-k%>)"></i></li>
+      <%}%>
+      <li id="adding_table" onclick="addTab()">+</li>
+    </ul>
+    
+    <label>Nom</label>
+  <input type=text id="boardnameinput"><button onclick="changeName()">Ok</button>
+  </div><!-- //tab-wrapper -->
+  
+<script src="js/tab.js" ></script>  

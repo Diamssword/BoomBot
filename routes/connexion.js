@@ -8,7 +8,7 @@ async function router(router) {
 
     router.post('/connexion' , async (req , res , next) => {
         passport.authenticate('local' , {
-            successRedirect: '/series',
+            successRedirect: '/manager',
             failureRedirect: '/connexion',
             failureFlash: true
         })(req , res , next);

@@ -1,4 +1,6 @@
-module.exports={genRandom:genRandom}
+const SOUNDS = require("./models/sounds");
+
+module.exports={genRandom:genRandom,populateSounds:populateSounds}
 function genRandom(n) {
     let result = '';
     let char = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -9,3 +11,12 @@ function genRandom(n) {
     }
     return result;
 };
+
+async function populateSounds(boards) {
+    for(l in boards)
+    {
+    for (k in boards[l].SOUNDS) {
+        boards[l].SOUNDS[k] = await SOUNDS.findOne({ _id: boards[l].SOUNDS[k] }).exec();
+    }
+}
+}

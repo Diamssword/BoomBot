@@ -1,0 +1,24 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .drag_crollList
+  {
+    height: 100%;
+    overflow: auto;
+    margin-right: 20px;
+    float: left; 
+    display:initial;
+    min-width:25%;
+  }
+  .box {
+    border: 3px solid #00a494;
+    background-color: #15171C;
+    border-radius: .5em;
+    padding: 10px;
+  }
+
+  .box.over {
+    border: 3px dotted #00a494;
+  }

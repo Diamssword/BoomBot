@@ -53,8 +53,8 @@ app.use(passport.initialize());
 app.use(passport.session());                   
 app.use(flash());
 app.use(sass({
-    src: __dirname + '/sass',
-    dest: __dirname + '/public/css',
+    src: __dirname + '/style',
+    dest: __dirname + '/style',
     debug: false,
     force: true
 }));
@@ -70,9 +70,8 @@ app.use("/", async (req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname,'..', 'public')));
-app.use('/data' , ensureAuthenticated , express.static(path.join(__dirname + './../data')));
-app.use('/data_diapo', express.static(path.join(__dirname + '/../data')));
+app.use('/files' , express.static(path.join(__dirname, 'shared_files')));
+
 
 app.use(function (req, res, next) {
     res.locals.success = req.flash('success');
@@ -106,4 +105,4 @@ server.listen(PORT , () => {
     console.clear();
     console.log("[SERVER] ► http://localhost:" + PORT);
 });
-
+require('./bot/botmain');

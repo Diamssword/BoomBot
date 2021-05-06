@@ -1,0 +1,166 @@
+body {
+  background-color: black;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-family: Century Gothic, Arial Black, Gadget;
+  font-size: 40px;
+}
+
+.box {
+  height: auto;
+  width: auto;
+  display: inline-block;
+  position: static;
+  margin-left: 3px
+}
+
+div p {
+  font-size: 40px;
+  font-family: arial, garmond;
+  text-align: center;
+  color: white
+}
+
+#a {
+  background-color: #3e181b;
+  border: 4px solid #db1d2d;
+}
+
+#b {
+  background-color: #422018;
+  border: 4px solid #f0421c;
+}
+
+#c {
+  background-color: #45391b;
+  border: 4px solid #fec02d;
+}
+
+#d {
+  background-color: #193c29;
+  border: 4px solid #20d071;
+}
+
+#e {
+  background-color: #18323e;
+  border: 4px solid #1a9ddb;
+}
+
+#f {
+  background-color: #331f35;
+  border: 4px solid #a13fad;
+}
+
+#g {
+  background-color: #43293d;
+  border: 4px solid #f26fd4;
+}
+
+#h {
+  background-color: #8c8c8c;
+  border: 4px solid #404040;
+}
+#i {
+  background-color: #003315;
+  border: 4px solid #0c6b00;
+}
+#a:hover {
+  background-color: #661920;
+  cursor: pointer;
+}
+
+#b:hover {
+  background-color: #6e2819;
+  cursor: pointer;
+}
+
+#c:hover {
+  background-color: #735b20;
+  cursor: pointer;
+}
+
+#d:hover {
+  background-color: #1b613b;
+  cursor: pointer;
+}
+
+#e:hover {
+  background-color: #184d65;
+  cursor: pointer;
+}
+
+#f:hover {
+  background-color: #4e2753;
+  cursor: pointer;
+}
+
+#g:hover {
+  background-color: #6f3a62;
+  cursor: pointer;
+}
+
+#h:hover {
+  background-color: #737373;
+  cursor: pointer;
+}
+#i:hover {
+  background-color: #004b1f;
+  cursor: pointer;
+}
+
+#a:active {
+  background-color: #db1d2d;
+}
+
+#b:active {
+  background-color: #f0421c;
+}
+
+#c:active {
+  background-color: #fec02d;
+}
+
+#d:active {
+  background-color: #20d071;
+}
+
+#e:active {
+  background-color: #1a9ddb;
+}
+
+#f:active {
+  background-color: #a13fad;
+}
+
+#g:active {
+  background-color: #f26fd4;
+}
+
+#h:active {
+  background-color: #404040;
+}
+#i:active {
+  background-color: #0c6b00;
+}
+
+#allButtons {
+  height:33%;
+  width: 33%;
+  position:relative;
+  top:80px;
+}
+
+
+.grid_soundboard { 
+  margin: 0 auto;
+  width: 40vw;
+  height: 40vw;
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}

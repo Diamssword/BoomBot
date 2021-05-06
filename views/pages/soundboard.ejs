@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Diamssword | Soundboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Lemonada&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="stylesheet" type="text/css" href="style/soundboard.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <%- include('../fragments/head.ejs') %>
+        <%- include('../partials/messages.ejs') %>
+</head>
+<body>
+    <header>
+        <%- include('../fragments/header.ejs') %>
+    </header>
+    <%- include('../fragments/nav_bar.ejs') %>
+    <div>
+        
+        <%- include('../fragments/soundboard.ejs') %>
+        
+<div class="page_part div_list_boards_btns">
+<div id="listboard" class="list_boards">
+<%
+    
+    function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color+"30";
+}
+function rainbow(id) {
+    var numOfSteps = id.toString().charCodeAt(5);
+if(numOfSteps>97)
+    numOfSteps+=-97;
+else
+    numOfSteps+=-48;
+    var step = 26;
+    var r, g, b;
+    var h = step / numOfSteps;
+    var i = ~~(h * 6);
+    var f = h * 6 - i;
+    var q = 1 - f;
+    switch(i % 6){
+        case 0: r = 1; g = f; b = 0; break;
+        case 1: r = q; g = 1; b = 0; break;
+        case 2: r = 0; g = 1; b = f; break;
+        case 3: r = 0; g = q; b = 1; break;
+        case 4: r = f; g = 0; b = 1; break;
+        case 5: r = 1; g = 0; b = q; break;
+    }
+    var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
+    return (c+"30");
+}
+    for(k in locals.boards){%>
+    <div style="background-color:<%-rainbow(boards[k]._id)%> ;" class="btn-1" id="<%-boards[k]._id%>" onclick="loadBoard(<%-k%>)"><%-boards[k].LABEL%> <i class="far fa-times-circle fa-1x box-board-cross" onclick="deleteboard('<%-boards[k]._id%>')"></i></div>
+    <%}%>
+</div>
+<label for="codetxt" style=" display:block;">Code SoundBoard</label>
+<input id="codetxt" style=" display:block;" type="text">
+<div class="btn-1" onclick="sendCode()">
+    OK
+</div>
+</div>
+    </div>
+</body>
+<script>
+    function sendCode()
+    {
+        socket.emit("soundboard.sendCode",document.getElementById("codetxt").value);
+    }
+</script>
+<script src="js/soundboard.js"></script>
+<script>
+    var soundsboards=JSON.parse(`<%-JSON.stringify(boards)%>`);
+redrawBoard(soundsboards[0]);
+</script>
+</html>

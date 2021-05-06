@@ -4,22 +4,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Code de la route | DrivInnov</title>
+  
+    <title>Diamssword | Connexion</title>
     <link href="https://fonts.googleapis.com/css?family=Lemonada&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="icon" type="image/png" href="assets/logo/logo-drive-innov-blanc.png" />
-
+    <%- include('../fragments/head.ejs')  %> 
     <%- include('../partials/messages.ejs')  %> 
 </head>
 
 <body>
-    <header></header>
+    <header>
+        <%- include('../fragments/header.ejs')  %> </header>
+<div style="display:flex;">
+        <img src="assets/images/head.png">
+        <div >
+        <h1>Diamssword</h1>
+        <h3>Ruining the Internet since 1666</h3>
+        </div>
+    </div>
     <main class="main_connexion">
         <div class="container">
             <div class="login-container">
-                <form method="POST">
-                    <img class="avatar" src="assets/svg/profile.svg">
+                <form id="log_form" method="POST">
                     <h2>Bienvenue</h2>
                     <div class="input-div one">
                         <div class="i">
@@ -37,9 +44,14 @@
                             <input class="input" name="password" type="password" placeholder="Mot de passe">
                         </div>
                     </div>
-                    <a href="reset_MDP.ejs">Mot de passe oublier ?</a>
-                    <input type="submit" class="btn" value="Se connecter">
+                  
+                    <div class="btn-1" onclick="document.forms['log_form'].submit();">
+                        Connexion
+                    </div>
                 </form>
+                <div class="btn-1" onclick="window.location='/register'">
+                    Créer un compte
+                </div>
             </div>
         </div>
         <script text="text/javascript" src="connexion.js"></script>

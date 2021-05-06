@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Diamssword | Editeur</title>
+    <link href="https://fonts.googleapis.com/css?family=Lemonada&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="stylesheet" type="text/css" href="style/drag.css">
+    <link rel="icon" type="image/png" href="assets/logo/logo-drive-innov-blanc.png" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <%- include('../fragments/head.ejs') %>
+        <%- include('../partials/messages.ejs') %>
+</head>
+<body>
+    <header>
+        <%- include('../fragments/header.ejs') %>
+    </header>
+    <%- include('../fragments/nav_bar.ejs') %>
+    <div class="page_part">
+<h3>Code Profile : <%-user.CODE%></h3>
+    <input id="fileupload" type="file" hidden multiple>
+    <div>
+        <a onclick="document.getElementById('fileupload').click()">
+            <h3>Envoyer des fichiers
+                <img src="assets/svg/upload.svg" title="Cliquez pour selectionner" style="width:40px;"
+                    onclick="document.getElementById('fileupload').click()">
+            </h3>
+        </a>
+        <div class="manager_div_upload" id="attachedFilesDiv"></div>
+
+        <div class="btn-1" onclick="sendToServerPre()">
+            Envoyer!
+        </div>
+    </div>
+    <div class="manager_drag_div">
+        <%- include('../fragments/drag.ejs') %>
+    </div>
+</div>
+</body>
+<script src="js/file_upload.js"></script>
+<script src="js/sounds_list.js"></script>
+<script>
+    var soundsList = JSON.parse(`<%-JSON.stringify(locals.sounds)%>`);
+    var soundboards = JSON.parse(`<%-JSON.stringify(locals.user.SOUNDBOARDS?locals.user.SOUNDBOARDS:[])%>`);
+    var currentboard={LABEL:"defaut",SOUNDS:[]};
+    if(soundboards.length >0)
+    {
+        currentboard = soundboards[0];
+    }
+redrawList();
+redrawBoard(currentboard);
+function onListDrop(container,source)
+{
+    var ids = container.id.replace("drag","").split('.');
+    var row =parseInt(ids[0]);
+    var cell =parseInt(ids[1]);
+    var id = (row*3)+cell;
+    if(source.getElementsByTagName('i').length<1)
+    {
+        var ids1 = source.id.replace("drag","").split('.');
+    var row1 =parseInt(ids1[0]);
+    var cell1 =parseInt(ids1[1]);
+    var id1 = (row1*3)+cell1;
+   delete currentboard.SOUNDS[id];
+    }
+    if(!currentboard.SOUNDS)
+        currentboard.SOUNDS={};
+    currentboard.SOUNDS[id] =container.getElementsByTagName('i')[0].id;
+    sendSoundBoard();
+}
+function deleteSoundFromBoard(pos)
+{
+    var id ='drag'+parseInt((pos/3))+"."+(pos%3);
+      var div=document.getElementById(id);
+      div.innerHTML="__";
+     delete currentboard.SOUNDS[pos];
+    sendSoundBoard();
+}
+function sendSoundBoard()
+{
+    socket.emit('manager.updateSoundBoard',currentboard);
+}
+
+document.getElementById("boardnameinput").value= currentboard.LABEL;
+</script>
+
+</html>

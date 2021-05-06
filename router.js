@@ -9,7 +9,14 @@ const routesDir = path.join(__dirname, '/routes/');
 const sockets = [];
 const ariane = {};
 const arianeStr = {};
+const pages= [
+"./routes/connexion.js",
+"./routes/logout.js",
+"./routes/manager.js",
+"./routes/register.js",
+"./routes/soundboard.js",
 
+]
 /**
  * charge toute les pages dans le dossier et sous dossiers /route et avec une extension .js
  * si le fichier contient une fonction route() ou socket(), il les chargeras.
@@ -17,9 +24,10 @@ const arianeStr = {};
  * genere aussi tout les fils d'ariane
  */
 async function routing() {
-
-    for (const file of await getFiles(routesDir)) {
-        let imp = await require(`./routes/${file}`);
+    for (const file of pages) {
+    //for (const file of await getFiles(routesDir)) {
+      //  let imp = await require.main.require(path.normalize(__dirname+`/routes/${file}`));
+      let imp = await require.main.require(file);
         try {
             if (imp.route) {
                 imp.route(router);
